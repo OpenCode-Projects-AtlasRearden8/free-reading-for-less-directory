@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Reading for Less — genuinely free books, audio &amp; learning</title>
+<meta name="description" content="A hand-checked directory of genuinely free reading and listening: library ebook apps, public-domain libraries, open textbooks, language learning, and big-library cards. No affiliate links.">
+<style>
+  :root{
+    --ink:#1d2433; --paper:#fbfaf7; --card:#ffffff; --line:#e4e0d6;
+    --accent:#2c6e63; --accent-soft:#e5f1ef; --gold:#b07d2b; --muted:#6b7280;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font:16px/1.55 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--paper)}
+  header{background:var(--accent);color:#fff;padding:2.2rem 1rem 2.6rem}
+  .wrap{max-width:60rem;margin:0 auto;padding:0 1rem}
+  header h1{margin:0 0 .4rem;font-size:2rem;letter-spacing:-.02em}
+  header p{margin:.2rem 0;max-width:46rem;opacity:.92}
+  header .badge{display:inline-block;background:rgba(255,255,255,.16);border-radius:999px;padding:.15rem .7rem;font-size:.8rem;margin-top:.8rem}
+  main{padding:1.5rem 0 4rem}
+  .controls{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-bottom:.6rem}
+  #q{flex:1 1 16rem;padding:.6rem .8rem;border:1px solid var(--line);border-radius:.55rem;font-size:1rem;background:#fff}
+  .chips{display:flex;flex-wrap:wrap;gap:.45rem;margin:.8rem 0 1.2rem}
+  .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:.35rem .85rem;font-size:.85rem;cursor:pointer;color:var(--ink)}
+  .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+  .count{color:var(--muted);font-size:.85rem;margin:.2rem 0 1rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(17rem,1fr));gap:1rem}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:.8rem;padding:1.1rem;display:flex;flex-direction:column;gap:.5rem}
+  .card h2{margin:.1rem 0 0;font-size:1.12rem;letter-spacing:-.01em}
+  .card h2 a{color:var(--accent);text-decoration:none}
+  .card h2 a:hover,.card h2 a:focus{text-decoration:underline}
+  .cat{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gold);font-weight:600}
+  dl{margin:0;font-size:.9rem}
+  dt{font-weight:600;color:var(--accent);margin-top:.35rem}
+  dd{margin:.05rem 0 0}
+  .tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.5rem}
+  .tag{background:var(--accent-soft);color:var(--accent);border-radius:999px;font-size:.72rem;padding:.12rem .55rem}
+  .dates{margin-top:.6rem;font-size:.75rem;color:var(--muted);border-top:1px dashed var(--line);padding-top:.5rem}
+  .note{margin-top:2.5rem;border-top:1px solid var(--line);padding-top:1.2rem;color:var(--muted);font-size:.85rem}
+  footer{border-top:1px solid var(--line);padding:1.2rem 0 2rem;color:var(--muted);font-size:.85rem}
+  footer a{color:var(--accent)}
+  .hidden{display:none}
+  @media print{.controls,.chips,.chip{display:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Free Reading for Less</h1>
+    <p>A hand-checked directory of genuinely free reading and listening: library ebook and audio apps, public-domain libraries, open textbooks, language-learning freebies, and big-library cards almost anyone can get.</p>
+    <p><span class="badge">No affiliate links, ever</span> <span class="badge">Works offline</span> <span class="badge">Honest limits on every card</span></p>
+  </div>
+</header>
+<main class="wrap">
+  <div class="controls">
+    <label for="q" class="hidden">Search the directory</label>
+    <input id="q" type="search" placeholder="Search titles, tags, what's free…" autocomplete="off">
+  </div>
+  <div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
+  <p class="count" id="count" role="status"></p>
+  <section class="grid" id="grid" aria-label="Directory entries"></section>
+  <aside class="note" id="meta-note"></aside>
+</main>
+<footer class="wrap">
+  <p>Data last verified <strong id="verified"></strong>; scheduled recheck <strong id="recheck"></strong>.</p>
+  <p>Built by <strong>Asdale Dynamics, LLC</strong> — beginner-friendly AI education, books, and practical tools. Part of the Free Reading for Less project. MIT licensed.</p>
+  <p>This page runs entirely offline: every card's data is embedded in this single HTML file. Nothing phones home, no cookies, no trackers, no affiliate links.</p>
+</footer>
+<script id="site-data" type="application/json">{
+  "meta": {
+    "title": "Free Reading for Less",
+    "description": "A hand-checked directory of genuinely free reading and listening: library ebook and audio apps, public-domain libraries, open textbooks, language-learning freebies, and big-library cards almost anyone can get.",
+    "owner": "Asdale Dynamics, LLC",
+    "generatedNotice": "Data is embedded into index.html by tools/build.js. Edit data/sites.json, then rebuild.",
+    "freePolicy": "This directory contains no affiliate links, no referral codes, and no paid placements. Every card earns its place."
+  },
+  "checks": {
+    "verifiedOn": "2026-10-26",
+    "recheckOn": "2027-01-26"
+  },
+  "sites": [
+    {
+      "name": "Libby (OverDrive)",
+      "url": "https://libbyapp.com",
+      "category": "Library ebook & audio apps",
+      "tags": [
+        "ebooks",
+        "audiobooks",
+        "magazines",
+        "library card needed"
+      ],
+      "whatItIs": "The main app most U.S. public libraries use to lend ebooks, audiobooks, and digital magazines.",
+      "whatsFree": "Every borrow, hold, and read/listen. No subscription at any point.",
+      "signup": "A library card from a participating library (usually free for your own county or city residents).",
+      "honestLimits": "Popular new titles have waits and holds. Loan periods (typically 7–21 days) are set by your library. You need a real card — most systems prove residency, and some charge non-residents.",
+      "verifiedOn": "2026-10-26",
+      "recheckOn": "2027-01-26",
+      "notes": "Also handles Kindle delivery in the U.S. for ebook titles where the publisher allows it."
+    },
+    {
+      "name": "Hoopla",
+      "url": "https://www.hoopladigital.com",
+      "category": "Library ebook & audio apps",
+      "tags": [
+        "ebooks",
+        "audiobooks",
+        "comics",
+        "movies",
+        "music"
+      ],
+      "whatItIs": "A companion service to Libby used by thousands of libraries, offering instant-borrow ebooks, audiobooks, comics, movies, and music.",
+      "whatsFree": "All borrowing is free through your participating library.",
+      "signup": "A library card from a library that subscribes to Hoopla (signup takes about a minute).",
+      "honestLimits": "Borrows per month are capped (often 3–10, library's choice). No holds — titles are always available — but the catalog is mostly midlist and backlist, not current bestsellers.",
+      "verifiedOn": "2026-10-26",
+      "recheckOn": "2027-01-26",
+      "notes": "Great for always-available audiobooks when every Libby copy is on hold."
+    },
+    {
+      "name": "Project Gutenberg",
+      "url": "https://www.gutenberg.org",
+      "category": "Public-domain text",
+      "tags": [
+        "classics",
+        "epub",
+        "kindle",
+        "no signup"
+      ],
+      "whatItIs": "The oldest digital library: over 75,000 public-domain books built to endure 'as long as language itself'.",
+      "whatsFree": "Everything — download to your heart's content, in the U.S. and most other countries.",
+      "signup": "None. No account, no email, no ads — browse and download directly.",
+      "honestLimits": "Public domain means classics, not recent releases. Copyright terms differ by country, so a book free in the U.S. may not be free where you live.",
+      "verifiedOn": "2026-10-26",
+      "recheckOn": "2027-01-26",
+      "notes": "No registration, no fees, no ads. The strictest definition of genuinely free."
+    },
+    {
+      "name": "Standard Ebooks",
+      "url": "https://standardebooks.org",
+      "category": "Public-domain text",
+      "tags": [
+        "classics",
+        "beautiful editions",
+        "epub",
+        "kindle"
+      ],
+      "whatItIs": "Volunteer editors take Gutenberg texts and produce gorgeously typeset, carefully proofread epub and Kindle editions.",
+      "whatsFree": "All ebooks, under a CC0/public-domain dedication. The whole repo is on GitHub too.",
+      "signup": "None required for reading. The editing source lives on GitHub if you want to help.",
+      "honestLimits": "Only public-domain authors (Austen, Dickens, Lovecraft, etc.). New titles appear weekly, but don't expect modern books.",
+      "verifiedOn": "2026-10-26",
+      "recheckOn": "2027-01-26",
+      "notes": "Probably the best-looking free classics you'll ever put on an e-reader."
+    },
+    {
+      "name": "Internet Archive",
+      "url": "https://archive.org",
+      "category": "Public-domain text",
+      "tags": [
+        "scanned books",
+        "lending",
+        "audio",
+        "video"
+      ],
+      "whatItIs": "A giant non-profit library of scanned books, recordings, films, and websites.",
+      "whatsFree": "Millions of fully public-domain scans you can download outright, plus free account access.",
+      "signup": "Free account (email) only for lending modern books; public-domain downloads need nothing.",
+      "honestLimits": "Modern in-copyright books are lent with one-reader-per-copy waitlists, and publishers have sued over this model — that part of the catalog can change in court. Public-domain material is safe.",
+      "verifiedOn": "2026-10-26",
+      "recheckOn": "2027-01-26",
+      "notes": "Also hosts LibriVox audio and old radio/newsreel material. A nonprofit — no affiliate links."
+    },
+    {
+      "name": "Open Library",
+      "url": "https://openlibrary.org",
+      "category": "Public-domain text",
+      "tags": [
+        "lending",
+        "catalog",
+        "scans"
+      ],
+      "whatItIs": "An Internet Archive project: one web page for every book ever published, with borrowable digital copies for many.",
+      "whatsFree": "Catalog is free; classic pre-1928 books can be read online freely; modern titles borrow with a free account.",
+      "signup": "Free account (email) to borrow; reading public-domain classics is open.",
+      "honestLimits": "Each lendable digital copy serves one reader at a time, so expect hold lists for popular modern books (typically ~2 weeks per loan).",
+      "verifiedOn": "2026-10-26",
+      "recheckOn": "2027-01-26",
+      "notes": "Excellent as a 'does a free scan exist?' checker before you buy anything."
+    },
+    {
+      "name": "Wikisource",
+      "url": "https://wikisource.org",
+      "category": "Public-domain text",
+      "tags": [
+        "documents",
+        "speeches",
+        "multi-language"
+      ],
+      "whatItIs": "Wikimedia's library of source texts: historical documents, speeches, laws, and public-domain works in many languages.",
+      "whatsFree": "Everything, forever, no account needed to read.",
+      "signup": "None for reading. A Wikimedia account only to edit.",
+      "honestLimits": "Coverage is uneven — famous documents are excellent, obscure books less so. Text-only, no typeset downloads.",
+      "verifiedOn": "2026-10-26",
+      "recheckOn": "2027-01-26",
+      "notes": "Also serves as the home of the multilingual portal linking language-specific Wikisources."
+    },
+    {
+      "name": "LibriVox",
+      "url": "https://librivox.org",
+      "category": "Public-domain audio",
+      "tags": [
+        "audiobooks",
+        "volunteers",
+        "podcast"
+      ],
+      "whatItIs": "Volunteer-read public-domain audiobooks: over 20,000 titles recorded by volunteers and given away free.",
+      "whatsFree": "All downloads, all formats (mp3, m4b, RSS feed). No ads, no account.",
+      "signup": "None. No account, no signup.",
+      "honestLimits": "Narration quality varies by volunteer — some are wonderful, some are rough. Only public-domain books.",
+      "verifiedOn": "2026-10-26",
+      "recheckOn": "2027-01-26",
+      "notes": "Search by reader if you find a volunteer whose voice you like."
+    },
+    {
+      "name": "Lit2Go",
+      "url": "https://etc.usf.edu/lit2go/",
+      "category": "Public-domain audio",
+      "tags": [
+        "audiobooks",
+        "kids",
+        "classroom"
+      ],
+      "whatItIs": "A University of South Florida project pairing public-domain stories and poems with free mp3s and printable texts.",
+      "whatsFree": "Everything, including downloadable passages and reading-comprehension materials.",
+      "signup": "None. Browse and download directly.",
+      "honestLimits": "Public-domain works only; the catalog skews toward classics often used in schools.",
+      "verifiedOn": "2026-10-26",
+      "recheckOn": "2027-01-26",
+      "notes": "Specifies reading level (Flesch-Kincaid) for many passages — handy for parents and ESL readers."
+    },
+    {
+      "name": "Loyal Books",
+      "url": "https://www.loyalbooks.com",
+      "category": "Public-domain audio",
+      "tags": [
+        "audiobooks",
+        "multi-language"
+      ],
+      "whatItIs": "A free audiobook catalog of public-domain recordings (largely LibriVox and similar projects) organized in a friendlier interface.",
+      "whatsFree": "All downloads, mp3 and rss.",
+      "signup": "None. Browse and download directly.",
+      "honestLimits": "Same limits as any volunteer-read public-domain catalog: no modern bestsellers, quality varies.",
+      "verifiedOn": "2026-10-26",
+      "recheckOn": "2027-01-26",
+      "notes": "Includes non-English audio in a handful of languages."
+    },
+    {
+      "name": "OpenStax",
+      "url": "https://openstax.org",
+      "category": "Open textbooks & courses",
+      "tags": [
+        "textbooks",
+        "college",
+        "peer-reviewed"
+      ],
+      "whatItIs": "Rice University's peer-reviewed, openly licensed college textbooks (biology, chemistry, physics, economics, psychology, math...).",
+      "whatsFree": "Free web view, PDF, and cheap print. Instructor materials for verified instructors.",
+      "signup": "None for students. Instructors verify an institutional email for answer keys.",
+      "honestLimits": "Intro-level college subjects only. Problem sets sometimes reference paid online homework systems that are NOT free — ignore those and the book is fully free.",
+      "verifiedOn": "2026-10-26",
+      "recheckOn": "2027-01-26",
+      "notes": "Funded by philanthropy, not ads; no affiliate anything."
+    },
+    {
+      "name": "Open Textbook Library",
+      "url": "https://open.umn.edu/opentextbooks",
+      "category": "Open textbooks & courses",
+      "tags": [
+        "textbooks",
+        "searchable",
+        "reviews"
+      ],
+      "whatItIs": "University of Minnesota's searchable catalog of openly licensed textbooks across dozens of disciplines, with faculty reviews.",
+      "whatsFree": "All listed books are free to download and keep.",
+      "signup": "None. Browse and download directly.",
+      "honestLimits": "Quality varies between titles; read the published reviews. Some books are niche.",
+      "verifiedOn": "2026-10-26",
+      "recheckOn": "2027-01-26",
+      "notes": "A great first stop before paying $150 for a survey textbook."
+    },
+    {
+      "name": "MIT OpenCourseWare",
+      "url": "https://ocw.mit.edu",
+      "category": "Open textbooks & courses",
+      "tags": [
+        "courses",
+        "university",
+        "notes"
+      ],
+      "whatItIs": "MIT's free publication of 2,500+ real courses — lecture notes, assignments, some video.",
+      "whatsFree": "All course materials, no account, no fees.",
+      "signup": "None. Browse and download directly.",
+      "honestLimits": "No credit, no instructor, no certificate unless you bypass to paid options. Some courses are text-heavy rather than video.",
+      "verifiedOn": "2026-10-26",
+      "recheckOn": "2027-01-26",
+      "notes": "Pairs perfectly with a free OpenStax textbook for the reading stack."
+    },
+    {
+      "name": "Saylor Academy",
+      "url": "https://www.saylor.org",
+      "category": "Open textbooks & courses",
+      "tags": [
+        "courses",
+        "certificate"
+      ],
+      "whatItIs": "A nonprofit offering free self-paced courses built on openly licensed materials, with optional free certificates.",
+      "whatsFree": "Every course, plus free (non-credit) certificates on passing.",
+      "signup": "None to browse. Free account only for graded quizzes and certificates.",
+      "honestLimits": "Self-graded pace, no instructor feedback. Certificates aren't college credit, though a few courses can be recommended for credit by third parties.",
+      "verifiedOn": "2026-10-26",
+      "recheckOn": "2027-01-26",
+      "notes": "Solid for business, accounting, and computer-science refreshers."
+    },
+    {
+      "name": "Duolingo (free tier)",
+      "url": "https://www.duolingo.com",
+      "category": "Language learning",
+      "tags": [
+        "languages",
+        "gamified",
+        "apps"
+      ],
+      "whatItIs": "The famous bite-sized language app — and its core course content genuinely is free.",
+      "whatsFree": "The full course tree for 40+ languages on web and mobile, with ads.",
+      "signup": "Free account via email or Google. Upgrade is optional and never required.",
+      "honestLimits": "Ads and 'hearts' penalties push you toward Super Duolingo ($). It's persuasion-by-annoyance, not a paywall: patience or a web session works. Fewer languages with less depth than a school course.",
+      "verifiedOn": "2026-10-26",
+      "recheckOn": "2027-01-26",
+      "notes": "Do daily, but pair it with real reading (see the free library apps above)."
+    },
+    {
+      "name": "Language Transfer",
+      "url": "https://www.languagetransfer.org",
+      "category": "Language learning",
+      "tags": [
+        "audio",
+        "thinking method"
+      ],
+      "whatItIs": "Completely free 'thinking method' audio courses (Spanish, French, Arabic, Turkish, Greek, Italian, German, Swahili...) made by one volunteer-funded nonprofit.",
+      "whatsFree": "Everything — every lesson audio, offline downloads, no ads, no account.",
+      "signup": "None. Stream or download directly.",
+      "honestLimits": "Limited language list and it's audio-only; you must actually think along, not passively listen.",
+      "verifiedOn": "2026-10-26",
+      "recheckOn": "2027-01-26",
+      "notes": "Funded purely by donations. If it clicks for you, consider donating (that's their site, not an affiliate link)."
+    },
+    {
+      "name": "Live Lingua Project",
+      "url": "https://www.livelingua.com/project/fsi",
+      "category": "Language learning",
+      "tags": [
+        "FSI",
+        "DLI",
+        "text+audio",
+        "deep courses"
+      ],
+      "whatItIs": "Free hosting of the U.S. Foreign Service Institute and Defense Language Institute public-domain courses: full textbooks plus recorded drills.",
+      "whatsFree": "All course PDFs and mp3s.",
+      "signup": "None. Browse and download directly.",
+      "honestLimits": "Materials can be decades old (some dated vocabulary and gendered examples), and they're kitted out like 1960s language labs — because they are.",
+      "verifiedOn": "2026-10-26",
+      "recheckOn": "2027-01-26",
+      "notes": "The most rigorous free language training that exists; treat it as a serious course, not an app."
+    },
+    {
+      "name": "Brooklyn Public Library eCard",
+      "url": "https://www.bklynlibrary.org/library-card",
+      "category": "Big-library cards",
+      "tags": [
+        "e-card",
+        "New York State residents",
+        "instant signup"
+      ],
+      "whatItIs": "Brooklyn's digital-only library card, which unlocks Libby collections of one of the biggest library systems in the U.S.",
+      "whatsFree": "The eCard itself is free, instantly by email, for New York State residents age 13+.",
+      "signup": "Online form with a New York State address and birthdate.",
+      "honestLimits": "Only for people who live in New York State. eCards can access digital collections only, not physical branches; policies can change, so verify at the source before relying on it.",
+      "verifiedOn": "2026-10-26",
+      "recheckOn": "2027-01-26",
+      "notes": "A common trick: pair it with your local card to double your Libby catalog."
+    },
+    {
+      "name": "Your own county library card",
+      "url": "https://www.everylibrary.org",
+      "category": "Big-library cards",
+      "tags": [
+        "start here",
+        "local",
+        "free"
+      ],
+      "whatItIs": "The single highest-value free reading resource you already own access to: your home public library's ebooks, audiobooks, magazines, movies, and newspapers.",
+      "whatsFree": "Card and all digital services for residents — often online signup with instant approval.",
+      "signup": "One photo ID plus proof of residency at your local branch, or an online form for instant digital access.",
+      "honestLimits": "Residency rules apply; non-resident fees exist in some places (though many systems offer reasonably priced non-resident cards worth it for one year).",
+      "verifiedOn": "2026-10-26",
+      "recheckOn": "2027-01-26",
+      "notes": "Everylibrary links to advocacy; use your own system's site for signup details. This entry links to a nonprofit, not a paid listing."
+    },
+    {
+      "name": "NLS BARD (Braille and Audio Reading Download)",
+      "url": "https://nlsbard.loc.gov",
+      "category": "Big-library cards",
+      "tags": [
+        "accessibility",
+        "audiobooks",
+        "braille"
+      ],
+      "whatItIs": "The Library of Congress's program lending braille and audio books free to U.S. residents with qualifying visual, physical, or reading disabilities.",
+      "whatsFree": "Everything for eligible readers: device loans, braille, tens of thousands of downloadable audio titles.",
+      "signup": "Application certified by a doctor, librarian, or qualified professional; handled through your state network library.",
+      "honestLimits": "Eligibility requirements apply — it's designed for people who can't read standard print comfortably, not open enrollment.",
+      "verifiedOn": "2026-10-26",
+      "recheckOn": "2027-01-26",
+      "notes": "Healthcare workers: BARD is often unknown to patients who qualify for it. A plain-language tip worth passing along."
+    },
+    {
+      "name": "Library of Congress Digital Collections",
+      "url": "https://www.loc.gov/collections/",
+      "category": "Public-domain text",
+      "tags": [
+        "history",
+        "photos",
+        "manuscripts"
+      ],
+      "whatItIs": "Primary-source treasure chest: digitized letters, photographs, maps, sound recordings, and historic books from the national library.",
+      "whatsFree": "All publicly available items; no account needed.",
+      "signup": "None to browse. Researchers may request archival access separately.",
+      "honestLimits": "It's a research collection, not a reader's shelf — you browse themes like a museum. Some materials have specific rights notices.",
+      "verifiedOn": "2026-10-26",
+      "recheckOn": "2027-01-26",
+      "notes": "Fantastic for authors (like ours) who write nonfiction and want free primary sources."
+    },
+    {
+      "name": "Open Culture",
+      "url": "https://www.openculture.com",
+      "category": "Public-domain text",
+      "tags": [
+        "curated",
+        "movies",
+        "courses",
+        "ebooks"
+      ],
+      "whatItIs": "A long-running nonprofit-minded blog curating 'the best free cultural & educational media' — free ebooks, audiobooks, courses, and films.",
+      "whatsFree": "The curation is free; everything it links out to is a free resource.",
+      "signup": "None. Newsletter signup is optional and you can skip it.",
+      "honestLimits": "It's a link blog: quality is curated but you end up at other sites whose terms can change. Occasional donation asks, no affiliate selling of the free lists.",
+      "verifiedOn": "2026-10-26",
+      "recheckOn": "2027-01-26",
+      "notes": "Their '800 Free eBooks' and '1,000 Free Audio Books' posts are perennial deep-dive indexes."
+    }
+  ]
+}
+</script>
+<script>
+(function(){
+  var data = JSON.parse(document.getElementById('site-data').textContent);
+  var sites = data.sites, checks = data.checks;
+
+  var el = function(tag, cls, text){ var n=document.createElement(tag); if(cls)n.className=cls; if(text!==undefined)n.textContent=text; return n; };
+  var escKey = function(s){ return s.replace(/\W+/g,'-'); };
+
+  var state = { q:'', cat:'All' };
+  var cats = ['All'];
+  sites.forEach(function(s){ if(cats.indexOf(s.category)===-1) cats.push(s.category); });
+
+  var chipBox = document.getElementById('chips');
+  cats.forEach(function(c){
+    var b = el('button','chip', c + ' (' + (c==='All'? sites.length : sites.filter(function(s){return s.category===c;}).length) + ')');
+    b.type='button'; b.dataset.cat=c; b.setAttribute('aria-pressed', c===state.cat ? 'true':'false');
+    b.addEventListener('click', function(){
+      state.cat = c;
+      chipBox.querySelectorAll('.chip').forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+      b.setAttribute('aria-pressed','true');
+      render();
+    });
+    chipBox.appendChild(b);
+  });
+
+  var grid = document.getElementById('grid');
+  var countEl = document.getElementById('count');
+
+  function card(s){
+    var c = el('article','card');
+    c.appendChild(el('span','cat', s.category));
+    var h = el('h2'); var a = el('a', null, s.name);
+    a.href = s.url; a.target='_blank'; a.rel='noopener noreferrer';
+    h.appendChild(a); c.appendChild(h);
+    var dl = el('dl');
+    var row = function(t,d){ dl.appendChild(el('dt',null,t)); dl.appendChild(el('dd',null,d)); };
+    row('What it is', s.whatItIs);
+    row("What's truly free", s.whatsFree);
+    row('Signup needs', s.signup);
+    row('Honest limits', s.honestLimits);
+    if (s.notes) row('Notes', s.notes);
+    c.appendChild(dl);
+    var t = el('div','tags');
+    s.tags.forEach(function(tag){ t.appendChild(el('span','tag', tag)); });
+    c.appendChild(t);
+    var d = el('div','dates');
+    d.textContent = 'Verified free on ' + s.verifiedOn + ' — recheck by ' + s.recheckOn;
+    c.appendChild(d);
+    return c;
+  }
+
+  function render(){
+    grid.textContent = '';
+    var q = state.q.toLowerCase();
+    var shown = 0;
+    sites.forEach(function(s){
+      var hay = (s.name+' '+s.tags.join(' ')+' '+s.whatItIs+' '+s.whatsFree+' '+s.category).toLowerCase();
+      if (state.cat !== 'All' && s.category !== state.cat) return;
+      if (q && hay.indexOf(q) === -1) return;
+      grid.appendChild(card(s)); shown++;
+    });
+    countEl.textContent = shown + ' of ' + sites.length + ' entries showing';
+  }
+
+  document.getElementById('q').addEventListener('input', function(e){ state.q = e.target.value.trim(); render(); });
+
+  document.getElementById('verified').textContent = checks.verifiedOn;
+  document.getElementById('recheck').textContent = checks.recheckOn;
+  var m = el('p', null, data.meta.description + ' ' + data.meta.freePolicy);
+  document.getElementById('meta-note').appendChild(m);
+
+  render();
+})();
+</script>
+</body>
+</html>

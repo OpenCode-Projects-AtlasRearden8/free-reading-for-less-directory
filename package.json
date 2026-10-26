@@ -1,0 +1,11 @@
+{
+  "name": "free-reading-for-less-directory",
+  "version": "1.0.0",
+  "description": "Static offline HTML directory of genuinely free reading and listening resources. No affiliate links.",
+  "private": true,
+  "scripts": {
+    "build": "node tools/build.js",
+    "test": "node tools/test.js"
+  },
+  "license": "MIT"
+}

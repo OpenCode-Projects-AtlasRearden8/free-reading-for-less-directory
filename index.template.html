@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Reading for Less — genuinely free books, audio &amp; learning</title>
+<meta name="description" content="A hand-checked directory of genuinely free reading and listening: library ebook apps, public-domain libraries, open textbooks, language learning, and big-library cards. No affiliate links.">
+<style>
+  :root{
+    --ink:#1d2433; --paper:#fbfaf7; --card:#ffffff; --line:#e4e0d6;
+    --accent:#2c6e63; --accent-soft:#e5f1ef; --gold:#b07d2b; --muted:#6b7280;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font:16px/1.55 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--paper)}
+  header{background:var(--accent);color:#fff;padding:2.2rem 1rem 2.6rem}
+  .wrap{max-width:60rem;margin:0 auto;padding:0 1rem}
+  header h1{margin:0 0 .4rem;font-size:2rem;letter-spacing:-.02em}
+  header p{margin:.2rem 0;max-width:46rem;opacity:.92}
+  header .badge{display:inline-block;background:rgba(255,255,255,.16);border-radius:999px;padding:.15rem .7rem;font-size:.8rem;margin-top:.8rem}
+  main{padding:1.5rem 0 4rem}
+  .controls{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-bottom:.6rem}
+  #q{flex:1 1 16rem;padding:.6rem .8rem;border:1px solid var(--line);border-radius:.55rem;font-size:1rem;background:#fff}
+  .chips{display:flex;flex-wrap:wrap;gap:.45rem;margin:.8rem 0 1.2rem}
+  .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:.35rem .85rem;font-size:.85rem;cursor:pointer;color:var(--ink)}
+  .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+  .count{color:var(--muted);font-size:.85rem;margin:.2rem 0 1rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(17rem,1fr));gap:1rem}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:.8rem;padding:1.1rem;display:flex;flex-direction:column;gap:.5rem}
+  .card h2{margin:.1rem 0 0;font-size:1.12rem;letter-spacing:-.01em}
+  .card h2 a{color:var(--accent);text-decoration:none}
+  .card h2 a:hover,.card h2 a:focus{text-decoration:underline}
+  .cat{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gold);font-weight:600}
+  dl{margin:0;font-size:.9rem}
+  dt{font-weight:600;color:var(--accent);margin-top:.35rem}
+  dd{margin:.05rem 0 0}
+  .tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.5rem}
+  .tag{background:var(--accent-soft);color:var(--accent);border-radius:999px;font-size:.72rem;padding:.12rem .55rem}
+  .dates{margin-top:.6rem;font-size:.75rem;color:var(--muted);border-top:1px dashed var(--line);padding-top:.5rem}
+  .note{margin-top:2.5rem;border-top:1px solid var(--line);padding-top:1.2rem;color:var(--muted);font-size:.85rem}
+  footer{border-top:1px solid var(--line);padding:1.2rem 0 2rem;color:var(--muted);font-size:.85rem}
+  footer a{color:var(--accent)}
+  .hidden{display:none}
+  @media print{.controls,.chips,.chip{display:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Free Reading for Less</h1>
+    <p>A hand-checked directory of genuinely free reading and listening: library ebook and audio apps, public-domain libraries, open textbooks, language-learning freebies, and big-library cards almost anyone can get.</p>
+    <p><span class="badge">No affiliate links, ever</span> <span class="badge">Works offline</span> <span class="badge">Honest limits on every card</span></p>
+  </div>
+</header>
+<main class="wrap">
+  <div class="controls">
+    <label for="q" class="hidden">Search the directory</label>
+    <input id="q" type="search" placeholder="Search titles, tags, what's free…" autocomplete="off">
+  </div>
+  <div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
+  <p class="count" id="count" role="status"></p>
+  <section class="grid" id="grid" aria-label="Directory entries"></section>
+  <aside class="note" id="meta-note"></aside>
+</main>
+<footer class="wrap">
+  <p>Data last verified <strong id="verified"></strong>; scheduled recheck <strong id="recheck"></strong>.</p>
+  <p>Built by <strong>Asdale Dynamics, LLC</strong> — beginner-friendly AI education, books, and practical tools. Part of the Free Reading for Less project. MIT licensed.</p>
+  <p>This page runs entirely offline: every card's data is embedded in this single HTML file. Nothing phones home, no cookies, no trackers, no affiliate links.</p>
+</footer>
+<script id="site-data" type="application/json">__SITES_JSON__</script>
+<script>
+(function(){
+  var data = JSON.parse(document.getElementById('site-data').textContent);
+  var sites = data.sites, checks = data.checks;
+
+  var el = function(tag, cls, text){ var n=document.createElement(tag); if(cls)n.className=cls; if(text!==undefined)n.textContent=text; return n; };
+  var escKey = function(s){ return s.replace(/\W+/g,'-'); };
+
+  var state = { q:'', cat:'All' };
+  var cats = ['All'];
+  sites.forEach(function(s){ if(cats.indexOf(s.category)===-1) cats.push(s.category); });
+
+  var chipBox = document.getElementById('chips');
+  cats.forEach(function(c){
+    var b = el('button','chip', c + ' (' + (c==='All'? sites.length : sites.filter(function(s){return s.category===c;}).length) + ')');
+    b.type='button'; b.dataset.cat=c; b.setAttribute('aria-pressed', c===state.cat ? 'true':'false');
+    b.addEventListener('click', function(){
+      state.cat = c;
+      chipBox.querySelectorAll('.chip').forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+      b.setAttribute('aria-pressed','true');
+      render();
+    });
+    chipBox.appendChild(b);
+  });
+
+  var grid = document.getElementById('grid');
+  var countEl = document.getElementById('count');
+
+  function card(s){
+    var c = el('article','card');
+    c.appendChild(el('span','cat', s.category));
+    var h = el('h2'); var a = el('a', null, s.name);
+    a.href = s.url; a.target='_blank'; a.rel='noopener noreferrer';
+    h.appendChild(a); c.appendChild(h);
+    var dl = el('dl');
+    var row = function(t,d){ dl.appendChild(el('dt',null,t)); dl.appendChild(el('dd',null,d)); };
+    row('What it is', s.whatItIs);
+    row("What's truly free", s.whatsFree);
+    row('Signup needs', s.signup);
+    row('Honest limits', s.honestLimits);
+    if (s.notes) row('Notes', s.notes);
+    c.appendChild(dl);
+    var t = el('div','tags');
+    s.tags.forEach(function(tag){ t.appendChild(el('span','tag', tag)); });
+    c.appendChild(t);
+    var d = el('div','dates');
+    d.textContent = 'Verified free on ' + s.verifiedOn + ' — recheck by ' + s.recheckOn;
+    c.appendChild(d);
+    return c;
+  }
+
+  function render(){
+    grid.textContent = '';
+    var q = state.q.toLowerCase();
+    var shown = 0;
+    sites.forEach(function(s){
+      var hay = (s.name+' '+s.tags.join(' ')+' '+s.whatItIs+' '+s.whatsFree+' '+s.category).toLowerCase();
+      if (state.cat !== 'All' && s.category !== state.cat) return;
+      if (q && hay.indexOf(q) === -1) return;
+      grid.appendChild(card(s)); shown++;
+    });
+    countEl.textContent = shown + ' of ' + sites.length + ' entries showing';
+  }
+
+  document.getElementById('q').addEventListener('input', function(e){ state.q = e.target.value.trim(); render(); });
+
+  document.getElementById('verified').textContent = checks.verifiedOn;
+  document.getElementById('recheck').textContent = checks.recheckOn;
+  var m = el('p', null, data.meta.description + ' ' + data.meta.freePolicy);
+  document.getElementById('meta-note').appendChild(m);
+
+  render();
+})();
+</script>
+</body>
+</html>
